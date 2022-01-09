@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate , useLocation} from 'react-router-dom'
 
 function Header() {
     const [isActive, setIsActive] = useState(false)
     let Navigate = useNavigate();
+    let location = useLocation();
     const getToken  =localStorage.getItem("user-loggedIn") 
     const userLoggedIn = getToken ? true :false;
     const handleLogout = () => {
@@ -17,7 +18,6 @@ function Header() {
     const handleDropdown = () => {
         setIsActive(!isActive)
     }
-    const jobId = 2;
     return (
         <>
         <nav className="navbar navbar-expand-md navbar-dark">
@@ -29,10 +29,9 @@ function Header() {
                     <ul className='navbar-nav me-auto mb-2 mb-md-0'></ul>
                     <form className="d-flex">
                         {!userLoggedIn && <button type='button' className="btn btn-outline-custom" onClick={handleLogin}>Login/Signup</button>}
-                        {/* <span className='color-white d-flex align-items-center mr-2'>{getToken}</span> */}
                         {userLoggedIn && (
                             <div className='d-flex align-items-center position-relative'>
-                                <Link to={`/recruiters/jobs/${jobId}`} className='color-white post__link'>Post a Job</Link>
+                                <Link to={`/jobs`} className='color-white post__link'>Post a Job</Link>
                                 <div onClick={handleDropdown} className='d-inline-block profile'>
                                     <span className='profileSec'>{getToken.split('')[0].toUpperCase()}</span>
                                     <span className='profileArrow'>&#x1F893;</span>
@@ -44,9 +43,9 @@ function Header() {
                 </div>
             </div>
         </nav>
-        <div className={`heroBg ${userLoggedIn && 'heroBgLogin'}`}></div>
+        <div className={location.pathname !== '/home' ? 'heroBg heroBgLogin': 'heroBg'}></div>
         <div className='container border__top position-relative'></div>
-        {userLoggedIn && (
+        {userLoggedIn && location.pathname !== '/home' && (
             <div className='container'>
                 <nav aria-label="breadcrumb" className='position-relative'>
                     <ol className="breadcrumb">

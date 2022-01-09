@@ -17,11 +17,11 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={userLoggedIn ? <Navigate replace to='/home'/> : <Navigate replace to='/login'/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
+          <Route path="/home" element={userLoggedIn && <Home/>}/>
+          <Route path="/login" element={userLoggedIn && <Login/>} />
           <Route path="/forgot" element={<ForgotPassword />} />
           <Route path="/signup" element={<Signup/>} />
-          <Route path="/recruiters/jobs/:jobId" element={<JobsPosted />} />
+          <Route path="/jobs/" element={<JobsPosted />} />
         </Routes>
       </Router>
       

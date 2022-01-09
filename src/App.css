@@ -13,10 +13,10 @@ body,html,#root{
   background-color: #303F60;
   height: 300px;
 }
-/* .heroBgLogin::before{
+.heroBgLogin::before{
   content: '';
   height: 190px;
-} */
+}
 .hero{
   position: relative;
 }
@@ -44,6 +44,41 @@ div.card__bg{
 }
 ol.breadcrumb{
   padding: 10px;
+}
+.paginate{
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 0;
+  margin-left: 0;
+}
+.paginate li {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(48, 63, 96, 1);
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+}
+.paginate li.active{
+  background: rgba(67, 175, 255, 0.2);
+  border: none;
+}
+.paginate li:first-child span,
+.paginate li:last-child span{
+  position: absolute;
+  font-size: 2rem;
+  top: -8px
+}
+.paginate li:first-child span{
+  left: 13px;
+}
+.paginate li:last-child span{
+  right: 13px;
 }
 /* profile section style */
 .profile{
