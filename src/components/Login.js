@@ -26,7 +26,7 @@ function Login() {
         }else if(!filter.test(inputVal.username)){
             setUserErr('Please enter valid email')
         }else{
-            navigate(`/recruiters/jobs/${jobId}`)
+            navigate(`/jobs`)
             setUserErr('')
         }
     }
