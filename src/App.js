@@ -10,7 +10,6 @@ import JobsPosted from './components/JobsPosted';
 function App() {
   const getToken  = localStorage.getItem("user-loggedIn") 
   const userLoggedIn = getToken ? true : false
-  console.log("userLoggedIn",userLoggedIn)
   return (
     <>
       <Router>

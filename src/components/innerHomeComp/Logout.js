@@ -6,7 +6,6 @@ function Logout() {
     const [hide,setHide] = useState('')
     const getToken  =localStorage.getItem("user-loggedIn") 
     const userLoggedIn = getToken ? true : false;
-    console.log(userLoggedIn)
     const hideAlert = () => {
         setHide('d-none')
     }
