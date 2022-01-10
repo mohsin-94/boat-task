@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/boat-task/static/css/main.7a1a0002.css",
-    "main.js": "/boat-task/static/js/main.a25205a7.js",
+    "main.js": "/boat-task/static/js/main.aae86a63.js",
     "static/media/banner.png": "/boat-task/static/media/banner.9e06a4883675fe754a07.png",
     "index.html": "/boat-task/index.html",
     "main.7a1a0002.css.map": "/boat-task/static/css/main.7a1a0002.css.map",
-    "main.a25205a7.js.map": "/boat-task/static/js/main.a25205a7.js.map"
+    "main.aae86a63.js.map": "/boat-task/static/js/main.aae86a63.js.map"
   },
   "entrypoints": [
     "static/css/main.7a1a0002.css",
-    "static/js/main.a25205a7.js"
+    "static/js/main.aae86a63.js"
   ]
 }
