@@ -45,41 +45,6 @@ div.card__bg{
 ol.breadcrumb{
   padding: 10px;
 }
-.paginate{
-  display: flex;
-  list-style: none;
-  justify-content: center;
-  margin-top: 2rem;
-  padding: 0;
-  margin-left: 0;
-}
-.paginate li {
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(48, 63, 96, 1);
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  position: relative;
-}
-.paginate li.active{
-  background: rgba(67, 175, 255, 0.2);
-  border: none;
-}
-.paginate li:first-child span,
-.paginate li:last-child span{
-  position: absolute;
-  font-size: 2rem;
-  top: -8px
-}
-.paginate li:first-child span{
-  left: 13px;
-}
-.paginate li:last-child span{
-  right: 13px;
-}
 /* profile section style */
 .profile{
   cursor: pointer;
@@ -138,7 +103,7 @@ div.alert-light{
   top: 72px;
   padding: 10px;
 }
-div.alert-light .close{
+.close{
   background: transparent;
   border: none;
   position: absolute;
@@ -160,7 +125,17 @@ div.alert-light .close{
   bottom: -18px;
   left: 50%;
   transform: translateX(-50%);
-  
+}
+.modal.show{
+  display: block;
+}
+.modal-dialog{
+  position: relative;
+  z-index: 9999;
+}
+.modal-body{
+  height: calc(100vh - 122px);
+    overflow: auto;
 }
 /* utility */
 .color-white{
@@ -195,11 +170,17 @@ a.btn:hover{
 .primaryTextColor{
   color: #43AFFF;
 }
+.secondaryTextColor{
+  color: rgba(48, 63, 96, 1);
+}
 .display-7{
   font-size: 1.625rem;
 }
 .display-8{
   font-size: 1.25rem;
+}
+.display-9{
+  font-size: 1rem;
 }
 label{
   font-weight: 500;
@@ -217,4 +198,12 @@ input.form-control::placeholder{
 }
 .text-right{
   text-align: right;
+}
+.grayBg{
+  background: #e0e4ed;
+  padding: 1rem 0;
+  border-radius: 10px;
+}
+div.border-gray{
+  border: 1px solid rgba(48, 63, 96, 0.5)
 }

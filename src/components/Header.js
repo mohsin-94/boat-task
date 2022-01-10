@@ -22,7 +22,7 @@ function Header() {
         <>
         <nav className="navbar navbar-expand-md navbar-dark">
             <div className="container">
-                <Link className="navbar-brand" to="/home">
+                <Link className="navbar-brand" to="/boat-task">
                     My<span className='primaryTextColor'>Jobs</span>
                 </Link>
                 <div>
@@ -43,9 +43,9 @@ function Header() {
                 </div>
             </div>
         </nav>
-        <div className={location.pathname !== '/home' ? 'heroBg heroBgLogin': 'heroBg'}></div>
+        <div className={location.pathname !== '/boat-task' ? 'heroBg heroBgLogin': 'heroBg'}></div>
         <div className='container border__top position-relative'></div>
-        {userLoggedIn && location.pathname !== '/home' && (
+        {userLoggedIn && location.pathname !== '/boat-task' && (
             <div className='container'>
                 <nav aria-label="breadcrumb" className='position-relative'>
                     <ol className="breadcrumb">

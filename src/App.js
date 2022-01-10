@@ -15,8 +15,8 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={userLoggedIn ? <Navigate replace to='/home'/> : <Navigate replace to='/login'/>} />
-          <Route path="/home" element={<Home/>}/>
+          <Route path="/" element={userLoggedIn ? <Navigate replace to='/boat-task'/> : <Navigate replace to='/login'/>} />
+          <Route path="/boat-task" element={<Home/>}/>
           <Route path="/login" element={<Login/>} />
           <Route path="/forgot" element={<ForgotPassword />} />
           <Route path="/signup" element={<Signup/>} />
