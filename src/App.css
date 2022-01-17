@@ -252,3 +252,13 @@ p.card-text {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+label sup{
+  color: #f00;
+}
+.error_msg{
+  display: none;
+  color: #f00;
+}
+.error_msg.show{
+  display: block;
+}

@@ -5,10 +5,16 @@ import { Link } from 'react-router-dom'
 function Signup() {
     const [inputVal,setInputVal] = useState({
         fullName: '',
-        emailAddress: '',
-        createPassword: '',
+        email: '',
+        password: '',
         confirmPassword: '',
         skills: ''
+    })
+    const [showFiled,setShowFiled] = useState({
+        name: false,
+        email: false,
+        create: false,
+        skills: false
     })
     const changeHandler = (e) => {
         setInputVal({
@@ -16,33 +22,42 @@ function Signup() {
             [e.target.name]: e.target.value
         })
     }
-    const handlerSignupToken = async (name,email,createPassword,confirmPassword,skills) => {
-        const response = axios.post('https://jobs-api.squareboat.info/api/v1/auth/register', {
+    const handlerSignupToken = async (name,email,password,confirmPassword,skills) => {
+        const response = await axios.post('https://jobs-api.squareboat.info/api/v1/auth/register', {
             name,
             email,
-            createPassword,
+            password,
             confirmPassword,
             skills
         })
-        console.log(response,';;;;;;;')
         return response
     }
     const submitHandler = async (e) => {
         e.preventDefault();
-        const {fullName,emailAddress,createPassword,confirmPassword,skills} = inputVal
-        const response = await handlerSignupToken(fullName,emailAddress,createPassword,confirmPassword,skills)
-        console.log(response)
-        if(response.data.code == 422){
-            alert('wrong email or passowrd')
-            return
+        const {fullName,email,password,confirmPassword,skills} = inputVal
+        let filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(fullName == ''){
+            setShowFiled({name:true})
+        }else if(email == '' || !filter.test(email)){
+            setShowFiled({email:true})
+        }else if(password == '' || confirmPassword == ''){
+            setShowFiled({create:true})
+        }else if(skills == ''){
+            setShowFiled({skills:true})
+        }else{
+            const response = await handlerSignupToken(fullName,email,password,confirmPassword,skills)
+            console.log(response)
+            if(response.data.code == 422){
+                alert('wrong email or passowrd')
+                return
+            }
+            setShowFiled({
+                name: false,
+                email: false, 
+                create: false,
+                skills: false
+            })
         }
-        // setInputVal({
-        //     fullName: '',
-        //     emailAddress: '',
-        //     createPassword: '',
-        //     confirmPassword: '',
-        //     skills: ''
-        // })
     }
     
     return (
@@ -55,7 +70,7 @@ function Signup() {
                             <form className="mt-3" onSubmit={submitHandler}>
                                 <div className="form-group mb-3">
                                     <label className="mb-2">
-                                        I’m a*
+                                        I’m a<sup>*</sup>
                                     </label>
                                     <div>
                                         <button type='button' className="btn btn-outline-custom btn-custom mr-2">
@@ -75,27 +90,32 @@ function Signup() {
                                 </div>
                                 <div className="form-group mb-3">
                                     <label htmlFor="fullName" className="mb-2">
-                                        Full name*
+                                        Full name<sup>*</sup>
                                     </label>
                                     <input type="text" name="fullName" id="fullName" className="form-control" value={inputVal.fullName} onChange={changeHandler} placeholder="Enter your full name" />
+                                    <p className={showFiled.name ? 'error_msg show' : 'error_msg'}>Please fill the First name</p>
                                 </div>
                                 <div className="form-group mb-3">
-                                    <label htmlFor="emailAddress" className="mb-2">Email address*</label>
-                                    <input type="text" name="emailAddress" id="emailAddress" value={inputVal.emailAddress} className="form-control" onChange={changeHandler} placeholder="Enter your Email address" />
+                                    <label htmlFor="email" className="mb-2">Email address<sup>*</sup></label>
+                                    <input type="text" name="email" id="email" value={inputVal.email} className="form-control" onChange={changeHandler} placeholder="Enter your Email address" />
+                                    <p className={showFiled.email ? 'error_msg show' : 'error_msg'}>Please fill the Email</p>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col">
-                                        <label htmlFor="createPassword" className="mb-2">Create Password*</label>
-                                        <input type="text" id="createPassword" name="createPassword" value={inputVal.createPassword} className="form-control" onChange={changeHandler} placeholder="Enter your password" />
+                                        <label htmlFor="password" className="mb-2">Create Password<sup>*</sup></label>
+                                        <input type="text" id="password" name="password" value={inputVal.password} className="form-control" onChange={changeHandler} placeholder="Enter your password" />
                                     </div>
                                     <div className="col">
-                                        <label htmlFor="confirmPassword" className="mb-2">Confirm Password*</label>
+                                        <label htmlFor="confirmPassword" className="mb-2">Confirm Password<sup>*</sup></label>
                                         <input type="text" id="confirmPassword" name="confirmPassword" value={inputVal.confirmPassword}  className="form-control" onChange={changeHandler} placeholder="Enter your password" />
+                                        
                                     </div>
+                                    <p className={showFiled.create ? 'error_msg show' : 'error_msg'}>Please fill the passowrds</p>
                                 </div>
                                 <div className="form-group mb-3">
                                     <label htmlFor="skills" className="mb-2">Skills</label>
                                     <input type="text" name="skills" id="skills" value={inputVal.skills} className="form-control" onChange={changeHandler} placeholder="Enter comma separated skills" />
+                                    <p className={showFiled.skills ? 'error_msg show' : 'error_msg'}>Please fill the skills</p>
                                 </div>
                                 <div className='text-center'>
                                     <button type='submit' className="btn btn-outline-custom btn-custom px-5">Signup</button>
