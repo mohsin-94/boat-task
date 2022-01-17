@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 function Signup() {
@@ -15,17 +16,35 @@ function Signup() {
             [e.target.name]: e.target.value
         })
     }
-    const submitHandler = (e) => {
-        e.preventDefault();
-        setInputVal({
-            fullName: '',
-            emailAddress: '',
-            createPassword: '',
-            confirmPassword: '',
-            skills: ''
+    const handlerSignupToken = async (name,email,createPassword,confirmPassword,skills) => {
+        const response = axios.post('https://jobs-api.squareboat.info/api/v1/auth/register', {
+            name,
+            email,
+            createPassword,
+            confirmPassword,
+            skills
         })
+        console.log(response,';;;;;;;')
+        return response
     }
-    const loginId = 3;
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        const {fullName,emailAddress,createPassword,confirmPassword,skills} = inputVal
+        const response = await handlerSignupToken(fullName,emailAddress,createPassword,confirmPassword,skills)
+        console.log(response)
+        if(response.data.code == 422){
+            alert('wrong email or passowrd')
+            return
+        }
+        // setInputVal({
+        //     fullName: '',
+        //     emailAddress: '',
+        //     createPassword: '',
+        //     confirmPassword: '',
+        //     skills: ''
+        // })
+    }
+    
     return (
         <section>
             <div className="card card__login">

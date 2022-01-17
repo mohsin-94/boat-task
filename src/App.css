@@ -207,3 +207,48 @@ input.form-control::placeholder{
 div.border-gray{
   border: 1px solid rgba(48, 63, 96, 0.5)
 }
+ul.paginate {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.paginate li {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #ddd;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 5px;
+  color: #303f60;
+}
+.paginate li:first-child span {
+  position: absolute;
+  font-size: 2rem;
+  top: -11px;
+  left: 10px;
+}
+.paginate li:last-child span {
+  position: absolute;
+  font-size: 2rem;
+  top: -11px;
+  right: 10px;
+}
+.paginate li.active {
+  background: #303f60;
+  color: #fff;
+}
+div.card{
+  border-radius: .75rem;
+  height: 100%;
+}
+p.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

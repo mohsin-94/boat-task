@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 
@@ -15,19 +16,35 @@ function Login() {
             [e.target.name]: e.target.value
         })
     }
-    const handleLogin = (e)=>{
+    const handleLoginToken = async (email,password) => {
+       const response = await axios.post('https://jobs-api.squareboat.info/api/v1/auth/login', {
+            email,
+            password
+        })
+        return response;   
+    }
+    const handleLogin = async (e) =>{
         e.preventDefault();
-        localStorage.setItem("user-loggedIn", inputVal.username)
+        
         let filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(inputVal.username == ''){
+        if(inputVal.username === ''){
             setUserErr('Username is not blank')
-        }else if(inputVal.password == ''){
+        }else if(inputVal.password === ''){
             setUserErr('Password is not blank')
         }else if(!filter.test(inputVal.username)){
             setUserErr('Please enter valid email')
         }else{
-            navigate(`/jobs`)
-            setUserErr('')
+            const {username,password} = inputVal;
+            const response = await handleLoginToken(username,password)
+            if(response.data.code == 422){
+                alert('wrong email or passowrd')
+                return
+            }
+            if(response.data.code == 200) {
+                localStorage.setItem("user-loggedIn", response.data.data.email)
+                navigate(`/jobs`)
+                setUserErr('')
+            }
         }
     }
     

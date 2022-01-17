@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Application() {
+function Application({email,name,skills}) {
     return (
         <div className="col-sm-6 mb-4">
             <div className="card border-gray">
@@ -10,12 +10,12 @@ function Application() {
                             <span className="profileSec">M</span>
                         </div>
                         <div>
-                            <h5 className="card-title">Eliza Lucas</h5>
-                            <p className="card-text secondaryTextColor">abc123@email.com</p>
+                            <h5 className="card-title">{name}</h5>
+                            <p className="card-text secondaryTextColor">{email}</p>
                         </div>
                     </div>
                     <h6 className='display-9'>Skills</h6>
-                    <p className="card-text secondaryTextColor">Coding, designing, graphics, website, app ui</p>
+                    <p className="card-text secondaryTextColor">{skills}</p>
                 </div>
             </div>
         </div>
