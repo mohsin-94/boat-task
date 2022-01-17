@@ -262,3 +262,12 @@ label sup{
 .error_msg.show{
   display: block;
 }
+.alert {
+  position: fixed !important;
+  right: 27px;
+  top: 71px;
+  display: none;
+}
+.alert.show{
+  display: inline-block;
+}

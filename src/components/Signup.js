@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
 function Signup() {
+    const navigate = useNavigate()
+    const [showAlert,setShowAlert] = useState(false)
     const [inputVal,setInputVal] = useState({
-        fullName: '',
+        name: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -22,34 +24,41 @@ function Signup() {
             [e.target.name]: e.target.value
         })
     }
-    const handlerSignupToken = async (name,email,password,confirmPassword,skills) => {
+    const handlerSignupToken = async (name,email,password,confirmPassword,skills,userRole = 1) => {
         const response = await axios.post('https://jobs-api.squareboat.info/api/v1/auth/register', {
-            name,
             email,
+            userRole,
             password,
             confirmPassword,
+            name,
             skills
         })
         return response
     }
     const submitHandler = async (e) => {
         e.preventDefault();
-        const {fullName,email,password,confirmPassword,skills} = inputVal
+        const {name,email,password,confirmPassword,skills} = inputVal
+        console.log(confirmPassword.split('').length)
         let filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(fullName == ''){
+        if(name == ''){
             setShowFiled({name:true})
         }else if(email == '' || !filter.test(email)){
             setShowFiled({email:true})
-        }else if(password == '' || confirmPassword == ''){
+        }else if(password == '' || confirmPassword == '' || password.split('').length <= 7 || confirmPassword.split('').length <= 7){
             setShowFiled({create:true})
         }else if(skills == ''){
             setShowFiled({skills:true})
         }else{
-            const response = await handlerSignupToken(fullName,email,password,confirmPassword,skills)
-            console.log(response)
+            const response = await handlerSignupToken(name,email,password,confirmPassword,skills)
             if(response.data.code == 422){
                 alert('wrong email or passowrd')
                 return
+            }
+            if(response.data.code == 201) {
+                setShowAlert(true)
+                setTimeout(() => {
+                    navigate(`/login`)
+                },2000)
             }
             setShowFiled({
                 name: false,
@@ -57,11 +66,21 @@ function Signup() {
                 create: false,
                 skills: false
             })
+            setInputVal({
+                name: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                skills: ''
+            })
         }
     }
     
     return (
         <section>
+            <div className={showAlert?'alert alert-success show':'alert alert-success'} role="alert">
+                You have successfully signup!
+            </div>
             <div className="card card__login">
                 <div className="card-block">
                     <div className="card-body">
@@ -89,10 +108,10 @@ function Signup() {
                                     </div>
                                 </div>
                                 <div className="form-group mb-3">
-                                    <label htmlFor="fullName" className="mb-2">
+                                    <label htmlFor="name" className="mb-2">
                                         Full name<sup>*</sup>
                                     </label>
-                                    <input type="text" name="fullName" id="fullName" className="form-control" value={inputVal.fullName} onChange={changeHandler} placeholder="Enter your full name" />
+                                    <input type="text" name="name" id="name" className="form-control" value={inputVal.name} onChange={changeHandler} placeholder="Enter your full name" />
                                     <p className={showFiled.name ? 'error_msg show' : 'error_msg'}>Please fill the First name</p>
                                 </div>
                                 <div className="form-group mb-3">
