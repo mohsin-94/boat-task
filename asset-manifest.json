@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/boat-task/static/css/main.96b2ebd4.css",
-    "main.js": "/boat-task/static/js/main.e74303d3.js",
+    "main.css": "/boat-task/static/css/main.067f48e8.css",
+    "main.js": "/boat-task/static/js/main.d8539b87.js",
     "static/media/banner.png": "/boat-task/static/media/banner.9e06a4883675fe754a07.png",
     "index.html": "/boat-task/index.html",
-    "main.96b2ebd4.css.map": "/boat-task/static/css/main.96b2ebd4.css.map",
-    "main.e74303d3.js.map": "/boat-task/static/js/main.e74303d3.js.map"
+    "main.067f48e8.css.map": "/boat-task/static/css/main.067f48e8.css.map",
+    "main.d8539b87.js.map": "/boat-task/static/js/main.d8539b87.js.map"
   },
   "entrypoints": [
-    "static/css/main.96b2ebd4.css",
-    "static/js/main.e74303d3.js"
+    "static/css/main.067f48e8.css",
+    "static/js/main.d8539b87.js"
   ]
 }
