@@ -34,6 +34,7 @@ function Login() {
         }else if(!filter.test(inputVal.username)){
             setUserErr('Please enter valid email')
         }else{
+            try{
             const {username,password} = inputVal;
             const response = await handleLoginToken(username,password)
             if(response.data.code == 422){
@@ -44,6 +45,9 @@ function Login() {
                 localStorage.setItem("user-loggedIn", response.data.data.email)
                 navigate(`/jobs`)
                 setUserErr('')
+            }}
+            catch(err){
+                                alert('Wrong Email/Password')
             }
         }
     }
