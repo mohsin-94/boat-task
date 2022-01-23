@@ -225,6 +225,7 @@ ul.paginate {
   position: relative;
   border-radius: 5px;
   color: #303f60;
+  cursor: pointer;
 }
 .paginate li:first-child span {
   position: absolute;
